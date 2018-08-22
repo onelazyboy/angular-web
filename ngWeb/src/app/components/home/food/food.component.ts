@@ -9,7 +9,8 @@ export class FoodComponent implements OnInit {
 
   @Input() datas:any = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

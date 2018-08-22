@@ -22,7 +22,7 @@ export class WorkComponent implements OnInit {
     console.log("##############3#");
   
     this.appService.httpGet("articles/article","?articleId="+this._id).subscribe((res) => {
-        
+        console.log(this.data["media"]);
         this.data = res;
       });
   }

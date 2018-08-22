@@ -14,10 +14,13 @@
     <p class="dec">{{data.text}}</p>
 
     <!--食材  -->
-    <app-food [datas]="data.food"></app-food>
+    <app-food [datas]='media'></app-food>
 
-    <!--步骤  -->
-    <app-steps [datas]="data.work"></app-steps>
+    <div *ngIf="data.work">
+        <!--步骤  -->
+     <app-steps [datas]="data.work"></app-steps>
+    </div>
+    
 
     <!--提示  -->
     <div *ngIf="data.tip != ''" class="tips">
