@@ -19,8 +19,8 @@ export class IndexComponent implements OnInit {
     this.user = this.userService._user;
     this.userService.scrollToTop.subscribe(() => {
       this.scrollToTop();
-    })
-    
+    });
+
   }
 
   ngOnInit() {
@@ -28,14 +28,14 @@ export class IndexComponent implements OnInit {
   }
 
   scrollToTop() {
-    var nativeElement = this.myScrollContainer.nativeElement;
+    const nativeElement = this.myScrollContainer.nativeElement;
 
     this.itimer = setInterval(() => {
 
-      var speed = (0 - nativeElement.scrollTop) / 20;
+      let speed = (0 - nativeElement.scrollTop) / 20;
       speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
 
-      if (speed == 0) {
+      if (speed === 0) {
         clearInterval(this.itimer);
         nativeElement.scrollTop = 0;
       } else {
@@ -49,11 +49,12 @@ export class IndexComponent implements OnInit {
 
 
   onscroll(ev) {
-    //文档高度:ev.target.scrollHeight  可视窗口高度:clientHeight  scrollTop
+    // 文档高度:ev.target.scrollHeight  可视窗口高度:clientHeight  scrollTop
 
-    var evtarget = ev.target;
+    // tslint:disable-next-line:prefer-const
+    let evtarget = ev.target;
 
-    if (evtarget.scrollHeight == evtarget.clientHeight + evtarget.scrollTop) {
+    if (evtarget.scrollHeight === evtarget.clientHeight + evtarget.scrollTop) {
 
       switch (this.router.url.split('/')[1]) {
         case 'index':

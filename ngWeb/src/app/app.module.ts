@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule }    from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { AppRoutesModule } from './app-routes/app-routes.module';
 import { AppComponent } from './app.component';
 import { CanActivateService } from './app-routes/can-activate.service';
@@ -10,7 +10,8 @@ import { ResolveArticleService } from './app-routes/resolve-article.service';
 import { ResolvePeopleService } from './app-routes/resolve-people.service';
 import { UserService } from './service/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ServicesProvider} from './service/services';
+import { ServicesProvider} from './service/services';
+import { HttpClient, HttpHeaders, HttpParams, HttpClientModule  } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {ServicesProvider} from './service/services';
     BrowserModule,
     AppRoutesModule,
     HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule
   ],
   providers: [
@@ -29,7 +31,8 @@ import {ServicesProvider} from './service/services';
     ResolveShareService,
     ResolveArticleService,
     ResolvePeopleService,
-    ServicesProvider
+    ServicesProvider,
+    HttpClient
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,9 @@
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, Response } from '@angular/http';
 import { Injectable, EventEmitter } from '@angular/core';
-import "rxjs/add/operator/map";
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Observable';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { MessageService } from '../service/message.service';
 
 /*
   Generated class for the ServicesProvider provider.
@@ -17,42 +18,59 @@ export class ServicesProvider {
   rong_data: EventEmitter<number>;
   // httpPostT :any = db;
 
-  http: any;
   baseUrl: String;
-  url = "/webapi/v1/";
-
-  private headers = new Headers({ 'Content-type': 'application/json' ,'Access-Control-Allow-Origin':'*'});
-  private requestOptions = new RequestOptions({ headers: this.headers });
-
-  constructor(public httpC: Http) {
-    this.http = httpC;
+  url = '/webapi/v1/';
+  constructor(public http: HttpClient, private messageService: MessageService) {
   }
 
 
   httpGet(ur, params) {
-    return this.http.get(this.url + ur, { search: params }).map(result => result.json());
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json;charset=UTF-8'
+    });
+    return this.http.get<any>(this.url + ur + '?' + params, { headers: headers }).pipe(
+      catchError(this.handleError(ur, []))
+    );
   }
 
   httpPost(ur, params) {
-    return this.http.post(this.url + ur, params, this.requestOptions)
-      .map(this.extractdata)
-      .catch(this.handleError);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json;charset=UTF-8'
+    });
+    return this.http.post(this.url + ur, params, { headers: headers })
+      .pipe(map((response: Response) => {
+        return response;
+      }))
+      .pipe(catchError(this.handleError(ur, [])));
   }
 
   httpDelete(tb, params) {
-    return this.http.delete(this.url + tb, params, this.requestOptions)
-      .map(this.extractdata)
-      .catch(this.handleError);
+    return this.http.delete(this.url + tb, params)
+      .pipe(map((response: Response) => response.json()))
+      .pipe(catchError(this.handleError('', [])));
   }
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
-  private extractdata(res: Response) {
-    const body = res.json();
-    return body || {};
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
-  private handleError(error: any) {
-    const errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    return Observable.throw(errMsg);
+  /** Log a HeroService message with the MessageService */
+  private log(message: string) {
+    this.messageService.add(`HeroService: ${message}`);
   }
 
 }

@@ -8,7 +8,7 @@ import { SideBarComponent } from './side-bar.component';
     CommonModule,
     RouterModule
   ],
-  exports:[SideBarComponent],
+  exports: [SideBarComponent],
   declarations: [SideBarComponent]
 })
 export class SideBarModule { }

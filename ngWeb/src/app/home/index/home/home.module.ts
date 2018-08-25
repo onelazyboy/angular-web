@@ -6,7 +6,7 @@ import { CardModule } from '../../../components/home/card/card.module';
 import { SendShareModule } from '../../../components/home/send-share/send-share.module';
 import { SendQueModule } from '../../../components/home/send-que/send-que.module';
 import { FileUploadModule } from 'ng2-file-upload';
-import {ServicesProvider} from '../../../service/services';
+import { ServicesProvider } from '../../../service/services';
 import { CardComponent } from '../../../components/home/card/card.component';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { CardComponent } from '../../../components/home/card/card.component';
     SendShareModule,
     SendQueModule
   ],
-  providers:[
+  providers: [
     ServicesProvider
   ],
   declarations: [HomeComponent]

@@ -30,7 +30,7 @@ const appRoutes: Routes = [
   {
     path: '**', redirectTo: '/404'
   }
-]
+];
 
 @NgModule({
   imports: [

@@ -4,6 +4,7 @@ import { SignupComponent } from './signup.component';
 import { SignupRoutingModule } from './signup-routing.module';
 import { FormsModule } from '@angular/forms';
 import {ServicesProvider} from '../../../service/services';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import {ServicesProvider} from '../../../service/services';
     SignupRoutingModule,
     FormsModule
   ],
-  providers:[
+  providers: [
+    HttpClient,
     ServicesProvider
   ],
   declarations: [SignupComponent]

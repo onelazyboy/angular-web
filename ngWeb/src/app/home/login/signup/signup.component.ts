@@ -14,28 +14,28 @@ export class SignupComponent implements OnInit {
   nickname: any = '';
   pass: any = '';
 
-  constructor(public http: Http,public router: Router,private appService : ServicesProvider) { }
+  constructor(public http: Http, public router: Router, private appService: ServicesProvider) { }
 
   ngOnInit() {
   }
 
   regist() {
     if (this.name.length < 1 || this.pass.length < 1 || this.nickname.length < 1) {
-      alert("兄弟，你在搞笑吗？认真填...");
+      alert('兄弟，你在搞笑吗？认真填...');
       return true;
     }
 
-    this.appService.httpPost("register",'{"userId":"1000000004","name":"'+this.name+'","pass":"'+this.pass+'","nickname":"'+this.nickname+'"}').subscribe((res) => {
-       // console.log(res.json());
+    // tslint:disable-next-line:max-line-length
+    this.appService.httpPost('register', '{"name" :"' + this.name + '","pass":"' + this.pass + '","nickname":"' + this.nickname + '"}').subscribe((res) => {
         try {
+          console.log(res);
           if (res['userId']) {
-            localStorage.setItem("user",JSON.stringify(res));
+            localStorage.setItem('user', JSON.stringify(res));
             this.router.navigate(['index']);
-          } 
+          }
         } catch (error) {
-          alert("注册失败，账号可能已存在");
+          alert('注册失败，账号可能已存在');
         }
-        
       });
   }
 

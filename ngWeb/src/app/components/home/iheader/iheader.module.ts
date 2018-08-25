@@ -8,7 +8,7 @@ import { IheaderComponent } from './iheader.component';
     CommonModule,
     RouterModule
   ],
-  exports:[IheaderComponent],
+  exports: [IheaderComponent],
   declarations: [IheaderComponent]
 })
 export class IheaderModule { }

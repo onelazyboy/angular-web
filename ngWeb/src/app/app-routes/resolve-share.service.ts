@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Headers, Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ResolveShareService implements Resolve<any> {
@@ -23,7 +22,7 @@ export class ResolveShareService implements Resolve<any> {
     
     return this.http.post(url, "id=" + this._id, {
       headers: headers
-    }).map((res)=>{
+    }).subscribe((res)=>{
       if(res['_body'] != '0'){
         return  JSON.parse( res['_body'] )[0];
       }else{
